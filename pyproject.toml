@@ -1,0 +1,7 @@
+[project]
+name = "discord-logging-handler"
+version = "0.1.0"
+description = "out-of-the-box logging handler for discord alerting."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []

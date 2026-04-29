@@ -1,0 +1,2 @@
+class ContentManager:
+    pass
