@@ -1,2 +1,5 @@
+
+
 class ContentManager:
-    pass
+    @staticmethod
+    def
