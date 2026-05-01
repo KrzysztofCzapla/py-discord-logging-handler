@@ -1,4 +1,5 @@
 DISCORD_WEBHOOK_URL_PREFIX = "https://discord.com/api/webhooks/"
+DISCORD_MAX_CHARS = "2000"
 
 # ENV Variables
 DISCORD_LOGGING_HANDLER_WEBHOOK_URL = "DISCORD_LOGGING_HANDLER_WEBHOOK_URL"
@@ -24,3 +25,7 @@ DEFAULT_HEADERS = {
     "Accept": "*/*",
     "Connection": "keep-alive",
 }
+
+# Message Template Builders
+DEFAULT_PING = "@everyone"
+DEFAULT_EMOJI = ":rotating_light:"

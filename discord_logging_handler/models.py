@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import TypeVar
 
 
 @dataclass
@@ -11,15 +12,17 @@ class DiscordJSONData:
 
 
 @dataclass
-class DefaultDiscordMessageTemplate:
-    """All Message Templates should inherit this"""
-
+class BaseContentData:
     pass
-    # TODO - think whether the logic should be here and overriden or managed by the ocntent manager, or both?
+
+
+ContentDataType = TypeVar("ContentDataType", bound=BaseContentData)
 
 
 @dataclass
-class ErrorDiscordMessageTemplate(DefaultDiscordMessageTemplate):
+class ErrorContentData(BaseContentData):
     app_name: str
     file: str
     error_message: str
+    traceback: str | None = None
+

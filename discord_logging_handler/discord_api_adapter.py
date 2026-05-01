@@ -15,6 +15,12 @@ from discord_logging_handler.models import DiscordJSONData
 
 
 class DiscordAPIAdapter:
+    """
+    Internal class for interaction with the Discord API.
+
+    No need for detailed docstrings for now, since everything is straightforward.
+    """
+
     @staticmethod
     def send_webhook(
         body: DiscordJSONData,
