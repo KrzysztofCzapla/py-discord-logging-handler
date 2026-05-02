@@ -53,9 +53,9 @@ class _DefaultHandler(logging.Handler):
             app_name=self.input_data.app_name,
             file=file,
             message=message,
-            traceback=traceback,
             **additional_attributes,
         )
+        content_data.traceback = traceback
         _core_handler(content_data, self.input_data)
 
 
@@ -80,9 +80,9 @@ def _discord_loguru_handler_wrapper(input_data: DiscordHandlerInputData):
             app_name=input_data.app_name,
             file=file,
             message=message,
-            traceback=traceback,
             **additional_attributes,
         )
+        content_data.traceback = traceback
         _core_handler(content_data, input_data)
 
     return _discord_loguru_handler
@@ -109,9 +109,9 @@ def _discord_structlog_processor_wrapper(input_data: DiscordHandlerInputData):
             app_name=input_data.app_name,
             file=file,
             message=message,
-            traceback=traceback,
             **additional_attributes,
         )
+        content_data.traceback = traceback
         _core_handler(content_data, input_data)
 
         return event_dict

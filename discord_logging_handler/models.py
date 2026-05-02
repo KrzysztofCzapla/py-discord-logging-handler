@@ -19,7 +19,7 @@ class BaseContentData:
     app_name: str
     file: str
     message: str
-    traceback: str | None = field(default=None, init=True)
+    traceback: str | None = field(default=None, init=False)
     alert_emoji: str = field(default=DEFAULT_EMOJI, init=False)
     ping: str = field(default=DEFAULT_PING, init=False)
     additional_info: str | None = field(default=None, init=False)
