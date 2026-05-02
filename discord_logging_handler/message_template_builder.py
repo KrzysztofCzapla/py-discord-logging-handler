@@ -6,7 +6,7 @@ from discord_logging_handler.models import ErrorContentData, ContentDataType
 
 class BaseMessageTemplateBuilder(ABC, Generic[ContentDataType]):
     FIELD_LENGTH_LIMITS: Dict[str, int] = {}
-    PARTS_CONCATENATION_CHARACTER: str = "\n"
+    PARTS_CONCATENATION_CHARACTER: str = "\n\n"
 
     """
     Abstract class for creating message templates.
@@ -38,7 +38,7 @@ class ErrorMessageTemplateBuilder(BaseMessageTemplateBuilder[ErrorContentData]):
         """Parts are ordered by importance"""
         return [
             f"{data.alert_emoji} {data.ping} {data.alert_emoji}",
-            f"{f'-# **Additional Info** `{data.additional_info}`' if data.additional_info else ''}",
+            f"{f'-# **Additional Info:** `{data.additional_info}`' if data.additional_info else ''}",
             f":ringed_planet: **APP:** `{data.app_name}`",
             f":page_facing_up: **FILE:** `{data.file}`",
             f":warning: **ERROR:** `{data.message}`",

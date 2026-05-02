@@ -26,7 +26,7 @@ class ContentManager:
         truncated_fields = ContentManager._truncate_fields(
             data, template_builder.FIELD_LENGTH_LIMITS, DEFAULT_TRUNCATION_ENDING
         )
-        if add_additional_info:
+        if add_additional_info and truncated_fields:
             data.additional_info = DEFAULT_ADDITIONAL_DATA_TEXT.format(
                 truncated_fields=truncated_fields
             )
