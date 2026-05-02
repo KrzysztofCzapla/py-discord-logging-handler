@@ -1,5 +1,5 @@
 DISCORD_WEBHOOK_URL_PREFIX = "https://discord.com/api/webhooks/"
-DISCORD_MAX_CHARS = "2000"
+DISCORD_MAX_CHARS_LIMIT = 2000
 
 # ENV Variables
 DISCORD_LOGGING_HANDLER_WEBHOOK_URL = "DISCORD_LOGGING_HANDLER_WEBHOOK_URL"
@@ -29,3 +29,6 @@ DEFAULT_HEADERS = {
 # Message Template Builders
 DEFAULT_PING = "@everyone"
 DEFAULT_EMOJI = ":rotating_light:"
+DEFAULT_TRUNCATION_ENDING = "\n..."
+
+DEFAULT_ADDITIONAL_DATA_TEXT = "Truncated Fields: {truncated_fields}"
