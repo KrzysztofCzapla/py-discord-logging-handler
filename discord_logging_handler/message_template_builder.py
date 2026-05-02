@@ -41,6 +41,6 @@ class ErrorMessageTemplateBuilder(BaseMessageTemplateBuilder[ErrorContentData]):
             f"{f'-# **Additional Info** `{data.additional_info}`' if data.additional_info else ''}",
             f":ringed_planet: **APP:** `{data.app_name}`",
             f":page_facing_up: **FILE:** `{data.file}`",
-            f":warning: **ERROR:** `{data.error_message}`",
+            f":warning: **ERROR:** `{data.message}`",
             f"{f':printer: **TRACEBACK:** ```{data.traceback}```' if data.traceback else ''}",
         ]

@@ -11,7 +11,7 @@ from discord_logging_handler.constants import (
     DEFAULT_HEADERS,
     WRONG_WEBHOOK_URL_ERROR_MESSAGE,
 )
-from discord_logging_handler.models import DiscordJSONData
+from discord_logging_handler.models import DiscordAPIJSONData
 
 
 class DiscordAPIAdapter:
@@ -23,7 +23,7 @@ class DiscordAPIAdapter:
 
     @staticmethod
     def send_webhook(
-        body: DiscordJSONData,
+        body: DiscordAPIJSONData,
         webhook_url: str | None = None,
         webhook_id: str | None = None,
         webhook_token: str | None = None,
