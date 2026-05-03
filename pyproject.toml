@@ -5,3 +5,8 @@ description = "out-of-the-box logging handler for discord alerting."
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = []
+
+[dependency-groups]
+test = [
+    "pytest"
+]
