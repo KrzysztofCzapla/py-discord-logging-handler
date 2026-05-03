@@ -18,12 +18,15 @@ def add_discord_logging_handler(logger: Any, input_data: DiscordHandlerInputData
         raise ValueError(NO_LOGGER_SET_ERROR_MESSAGE)
     if not input_data:
         raise ValueError(NO_INPUT_DATA_ERROR_MESSAGE)
+    level = input_data.logging_level
     if hasattr(logger, "addHandler"):
         # default logger
-        logger.addHandler(_DefaultHandler(input_data))
+        handler = _DefaultHandler(input_data)
+        handler.setLevel(int(level))
+        logger.addHandler(handler)
     elif hasattr(logger, "add"):
         # loguru logger
-        logger.add(_discord_loguru_handler_wrapper(input_data), level="ERROR")
+        logger.add(_discord_loguru_handler_wrapper(input_data), level=level.name)
     elif hasattr(logger, "get_config"):
         # structlog logger
         config = logger.get_config()
@@ -33,4 +36,3 @@ def add_discord_logging_handler(logger: Any, input_data: DiscordHandlerInputData
         )
     else:
         raise ValueError(LOGGER_NOT_SUPPORTED_ERROR_MESSAGE)
-    # TODO - handle logging level

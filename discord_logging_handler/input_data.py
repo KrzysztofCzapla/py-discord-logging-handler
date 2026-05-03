@@ -2,6 +2,7 @@ from dataclasses import dataclass, field
 from typing import Type, List
 
 from discord_logging_handler.constants import NO_APP_NAME_ERROR_MESSAGE
+from discord_logging_handler.enums import DiscordLoggingHandlerLevel
 from discord_logging_handler.message_template_builder import (
     BaseMessageTemplateBuilder,
     ErrorMessageTemplateBuilder,
@@ -23,6 +24,7 @@ class DiscordHandlerInputData:
     message_template_builder_type: Type[BaseMessageTemplateBuilder] = (
         ErrorMessageTemplateBuilder
     )
+    logging_level: DiscordLoggingHandlerLevel = DiscordLoggingHandlerLevel.ERROR
 
     def __post_init__(self):
         if self.app_name is None:

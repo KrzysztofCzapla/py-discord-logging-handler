@@ -3,6 +3,7 @@ import traceback as tb
 
 from discord_logging_handler.content_manager import ContentManager
 from discord_logging_handler.discord_api_adapter import DiscordAPIAdapter
+from discord_logging_handler.enums import DiscordLoggingHandlerLevel
 from discord_logging_handler.models import (
     BaseContentData,
     DiscordAPIJSONData,
@@ -35,9 +36,6 @@ class _DefaultHandler(logging.Handler):
         self.input_data = input_data
 
     def emit(self, record: logging.LogRecord):
-        if record.levelno < logging.ERROR:
-            return
-
         message = record.getMessage()
         file = record.pathname
         traceback = None
@@ -62,9 +60,6 @@ class _DefaultHandler(logging.Handler):
 def _discord_loguru_handler_wrapper(input_data: DiscordHandlerInputData):
     def _discord_loguru_handler(message):
         record = message.record
-        if record["level"].no < 40:  # 40 is error
-            return
-
         message = record["message"]
         file = record["file"].path
         exc = record["exception"]
@@ -90,7 +85,11 @@ def _discord_loguru_handler_wrapper(input_data: DiscordHandlerInputData):
 
 def _discord_structlog_processor_wrapper(input_data: DiscordHandlerInputData):
     def _discord_structlog_processor(logger, method_name, event_dict):
-        if method_name not in ("error", "critical"):
+        logging_level = input_data.logging_level
+        legal_levels = DiscordLoggingHandlerLevel.get_current_and_higher_level_name(
+            logging_level.value
+        )
+        if method_name not in [level.lower() for level in legal_levels]:
             return event_dict
 
         message = event_dict.get("event")
