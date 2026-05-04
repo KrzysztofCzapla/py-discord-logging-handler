@@ -4,7 +4,11 @@ from typing import List
 import pytest
 
 from discord_logging_handler.message_template_builder import BaseMessageTemplateBuilder
-from discord_logging_handler.models import ErrorContentData, BaseContentData
+from discord_logging_handler.models import (
+    ErrorContentData,
+    BaseContentData,
+    DiscordAPIJSONData,
+)
 
 
 @pytest.fixture
@@ -49,3 +53,8 @@ def custom_message_template_builder(custom_content_data):
             ]
 
     return CustomMessageTemplateBuilder()
+
+
+@pytest.fixture
+def discord_api_json_data():
+    return DiscordAPIJSONData(content="blalblalbalbalbalalbalbalalb")

@@ -1,7 +1,10 @@
+import pytest
+
 from discord_logging_handler.message_template_builder import (
     ErrorMessageTemplateBuilder,
     BaseMessageTemplateBuilder,
 )
+from discord_logging_handler.models import BaseContentData
 
 
 class TestMessageTemplateBuilder:
@@ -23,6 +26,12 @@ class TestMessageTemplateBuilder:
     def test_custom_message_template_builder_no_build_message_parts(
         self, custom_content_data
     ):
-        # TODO - need to make it so subclass has an error without the implementation of the abstract method
-        class CustomMessageTemplateBuilder(BaseMessageTemplateBuilder):
+        class CustomMessageTemplateBuilderNoAbstractMethod(
+            BaseMessageTemplateBuilder[BaseContentData]
+        ):
             pass
+
+        with pytest.raises(TypeError) as error_info:
+            CustomMessageTemplateBuilderNoAbstractMethod()
+
+        assert "build_message_parts" in str(error_info)
