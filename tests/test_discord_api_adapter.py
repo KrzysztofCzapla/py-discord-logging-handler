@@ -1,5 +1,3 @@
-from unittest.mock import MagicMock
-
 import pytest
 
 from discord_logging_handler.constants import (
@@ -60,5 +58,5 @@ class TestDiscordAPIAdapter:
             self.adapter._get_webhook_url()
 
     def test_send_webhook(self, monkeypatch, discord_api_json_data):
-        monkeypatch.setattr("urllib.request.urlopen", MagicMock())
+        # `urllib.request.urlopen` should be mocked from the autorun fixture
         self.adapter.send_webhook(discord_api_json_data, webhook_url=self.good_url)

@@ -1,14 +1,26 @@
 from dataclasses import dataclass
 from typing import List
+from unittest.mock import MagicMock
 
 import pytest
 
+from discord_logging_handler import DiscordHandlerInputData
 from discord_logging_handler.message_template_builder import BaseMessageTemplateBuilder
 from discord_logging_handler.models import (
     ErrorContentData,
     BaseContentData,
     DiscordAPIJSONData,
 )
+
+
+@pytest.fixture(autouse=True)
+def mock_urllib(monkeypatch):
+    monkeypatch.setattr("urllib.request.urlopen", MagicMock())
+
+
+@pytest.fixture
+def default_input_data():
+    return DiscordHandlerInputData(app_name="test_app_name")
 
 
 @pytest.fixture
