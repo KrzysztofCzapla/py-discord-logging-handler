@@ -11,6 +11,7 @@ class TestDiscordLoggingHandlerAPI:
     def test_api_default_logging_smoke(
         self, default_input_data, mock_urllib, set_url_env_variable
     ):
+        mock_urllib.reset_mock()
         logger = logging.getLogger("TestAPI")
         add_discord_logging_handler(logger, default_input_data)
         logger.info("info logggg")
@@ -22,7 +23,8 @@ class TestDiscordLoggingHandlerAPI:
     def test_api_default_logging_traceback(
         self, default_input_data, mock_urllib, set_url_env_variable
     ):
-        logger = logging.getLogger("TestAPI")
+        mock_urllib.reset_mock()
+        logger = logging.getLogger("TestAPI2")
         add_discord_logging_handler(logger, default_input_data)
         try:
             1 / 0
@@ -34,6 +36,7 @@ class TestDiscordLoggingHandlerAPI:
     def test_api_loguru_smoke(
         self, default_input_data, mock_urllib, set_url_env_variable
     ):
+        mock_urllib.reset_mock()
         add_discord_logging_handler(loguru_logger, default_input_data)
         loguru_logger.info("info logggg")
         mock_urllib.assert_not_called()
@@ -44,6 +47,7 @@ class TestDiscordLoggingHandlerAPI:
     def test_api_loguru_traceback(
         self, default_input_data, mock_urllib, set_url_env_variable
     ):
+        mock_urllib.reset_mock()
         add_discord_logging_handler(loguru_logger, default_input_data)
         try:
             1 / 0
@@ -55,6 +59,7 @@ class TestDiscordLoggingHandlerAPI:
     def test_api_structlog_smoke(
         self, default_input_data, mock_urllib, set_url_env_variable
     ):
+        mock_urllib.reset_mock()
         structlog.configure(
             processors=[
                 discord_structlog_processor_wrapper(default_input_data),
@@ -66,14 +71,22 @@ class TestDiscordLoggingHandlerAPI:
         structlog_logger.error("error log")
         mock_urllib.assert_called_once()
         assert "traceback" not in get_mock_urllib_json_body(mock_urllib)
-        # todo - still not fully tested this one
 
     def test_api_structlog_traceback(
         self, default_input_data, mock_urllib, set_url_env_variable
     ):
-        pass
-
-    def test_api_structlog_other_configs_and_processors_not_changed(
-        self, default_input_data, mock_urllib, set_url_env_variable
-    ):
-        pass
+        mock_urllib.reset_mock()
+        structlog.configure(
+            processors=[
+                discord_structlog_processor_wrapper(default_input_data),
+            ],
+        )
+        structlog_logger = structlog.get_logger()
+        structlog_logger.info("info logggg")
+        mock_urllib.assert_not_called()
+        try:
+            1 / 0
+        except Exception as e:
+            structlog_logger.exception(f"error log {e}")
+        mock_urllib.assert_called_once()
+        assert "traceback" in get_mock_urllib_json_body(mock_urllib)
