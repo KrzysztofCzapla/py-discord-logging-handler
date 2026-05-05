@@ -5,6 +5,7 @@ from unittest.mock import MagicMock
 import pytest
 
 from discord_logging_handler import DiscordHandlerInputData
+from discord_logging_handler.constants import DISCORD_LOGGING_HANDLER_WEBHOOK_URL
 from discord_logging_handler.message_template_builder import BaseMessageTemplateBuilder
 from discord_logging_handler.models import (
     ErrorContentData,
@@ -15,7 +16,19 @@ from discord_logging_handler.models import (
 
 @pytest.fixture(autouse=True)
 def mock_urllib(monkeypatch):
-    monkeypatch.setattr("urllib.request.urlopen", MagicMock())
+    mock = MagicMock()
+    monkeypatch.setattr("urllib.request.urlopen", mock)
+    return mock
+
+
+@pytest.fixture
+def set_url_env_variable(monkeypatch):
+    monkeypatch.setenv(
+        DISCORD_LOGGING_HANDLER_WEBHOOK_URL,
+        "https://discord.com/api/webhooks/adadada/dadadad",
+    )
+    yield
+    monkeypatch.delenv(DISCORD_LOGGING_HANDLER_WEBHOOK_URL, raising=False)
 
 
 @pytest.fixture
