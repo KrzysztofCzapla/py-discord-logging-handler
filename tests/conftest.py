@@ -62,7 +62,12 @@ def custom_content_data():
 @pytest.fixture
 def custom_message_template_builder(custom_content_data):
     class CustomMessageTemplateBuilder(BaseMessageTemplateBuilder):
-        FIELD_LENGTH_LIMITS = {"traceback": 1000, "file": 200, "message": 500}
+        FIELD_LENGTH_LIMITS = {
+            "traceback": 1000,
+            "file": 200,
+            "message": 500,
+            "custom_field": 10,
+        }
 
         # typing: the CustomContentData comes as an object so we can only get its type in runtime,
         # for better readability and maintenance, the typing will not be ideal in tests
@@ -74,10 +79,10 @@ def custom_message_template_builder(custom_content_data):
                 f"{f'-# **Additional Info:** `{data.additional_info}`' if data.additional_info else ''}",
                 f":ringed_planet: **APP:** `{data.app_name}`",
                 f":page_facing_up: **FILE:** `{data.file}`",
-                f":warning: **ERROR:** `{data.custom_field}`",
+                f":custom_field: **ERROR:** `{data.custom_field}`",
             ]
 
-    return CustomMessageTemplateBuilder()
+    return CustomMessageTemplateBuilder
 
 
 @pytest.fixture

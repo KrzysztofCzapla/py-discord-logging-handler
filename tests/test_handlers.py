@@ -8,8 +8,9 @@ from discord_logging_handler.handlers import (
     _core_handler,
     _DefaultHandler,
     _discord_loguru_handler_wrapper,
-    _discord_structlog_processor_wrapper,
+    discord_structlog_processor_wrapper,
 )
+from tests.utils import get_mock_urllib_json_body
 
 
 class TestHandlers:
@@ -43,7 +44,7 @@ class TestHandlers:
         mock_urllib.assert_called_once()
 
         # assert our message is somewhere inside the json body sent to the Discord API
-        assert self.message in str(mock_urllib.call_args[0][0].data)
+        assert self.message in get_mock_urllib_json_body(mock_urllib)
 
     def test_loguru_handler(
         self, default_input_data, set_url_env_variable, mock_urllib
@@ -59,13 +60,13 @@ class TestHandlers:
         )
         handler_function(logging_message)
         mock_urllib.assert_called_once()
-        assert self.message in str(mock_urllib.call_args[0][0].data)
+        assert self.message in get_mock_urllib_json_body(mock_urllib)
 
     def test_structlog_processor(
         self, default_input_data, set_url_env_variable, mock_urllib
     ):
-        handler_function = _discord_structlog_processor_wrapper(default_input_data)
+        handler_function = discord_structlog_processor_wrapper(default_input_data)
         logging_message = {"event": self.message, "pathname": "my path", "extra": {}}
         handler_function(MagicMock(), "error", logging_message)
         mock_urllib.assert_called_once()
-        assert self.message in str(mock_urllib.call_args[0][0].data)
+        assert self.message in get_mock_urllib_json_body(mock_urllib)

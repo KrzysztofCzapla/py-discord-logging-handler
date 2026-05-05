@@ -4,11 +4,11 @@ from discord_logging_handler.constants import (
     NO_LOGGER_SET_ERROR_MESSAGE,
     LOGGER_NOT_SUPPORTED_ERROR_MESSAGE,
     NO_INPUT_DATA_ERROR_MESSAGE,
+    STRUCTLOG_WRONG_FUNCTION_ERROR_MESSAGE,
 )
 from discord_logging_handler.handlers import (
     _DefaultHandler,
     _discord_loguru_handler_wrapper,
-    _discord_structlog_processor_wrapper,
 )
 from discord_logging_handler.input_data import DiscordHandlerInputData
 
@@ -29,10 +29,6 @@ def add_discord_logging_handler(logger: Any, input_data: DiscordHandlerInputData
         logger.add(_discord_loguru_handler_wrapper(input_data), level=level.name)
     elif hasattr(logger, "get_config"):
         # structlog logger
-        config = logger.get_config()
-        processors = config.get("processors", [])
-        logger.configure(
-            processers=processors + [_discord_structlog_processor_wrapper(input_data)]
-        )
+        raise ValueError(STRUCTLOG_WRONG_FUNCTION_ERROR_MESSAGE)
     else:
         raise ValueError(LOGGER_NOT_SUPPORTED_ERROR_MESSAGE)

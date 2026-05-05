@@ -83,16 +83,17 @@ def _discord_loguru_handler_wrapper(input_data: DiscordHandlerInputData):
     return _discord_loguru_handler
 
 
-def _discord_structlog_processor_wrapper(input_data: DiscordHandlerInputData):
+def discord_structlog_processor_wrapper(input_data: DiscordHandlerInputData):
     def _discord_structlog_processor(logger, method_name, event_dict):
+        message = event_dict.get("event")
+
         logging_level = input_data.logging_level
         legal_levels = DiscordLoggingHandlerLevel.get_current_and_higher_level_name(
             logging_level.value
         )
         if method_name not in [level.lower() for level in legal_levels]:
-            return event_dict
+            return {"message": message}
 
-        message = event_dict.get("event")
         file = event_dict.get("pathname")
         traceback = None
         exc_info = event_dict.get("exc_info")
@@ -113,6 +114,6 @@ def _discord_structlog_processor_wrapper(input_data: DiscordHandlerInputData):
         content_data.traceback = traceback
         _core_handler(content_data, input_data)
 
-        return event_dict
+        return {"message": message}
 
     return _discord_structlog_processor

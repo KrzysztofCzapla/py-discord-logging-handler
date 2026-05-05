@@ -8,5 +8,7 @@ dependencies = []
 
 [dependency-groups]
 test = [
-    "pytest"
+    "pytest",
+    "loguru",
+    "structlog"
 ]

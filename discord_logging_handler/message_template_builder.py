@@ -31,7 +31,7 @@ class BaseMessageTemplateBuilder(ABC, Generic[ContentDataType]):
 
 
 class ErrorMessageTemplateBuilder(BaseMessageTemplateBuilder[ErrorContentData]):
-    FIELD_LENGTH_LIMITS = {"traceback": 1000, "file": 200, "message": 500}
+    FIELD_LENGTH_LIMITS = {"traceback": 900, "file": 200, "message": 400}
 
     @staticmethod
     def build_message_parts(data: ErrorContentData) -> List[str]:

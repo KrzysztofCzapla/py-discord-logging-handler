@@ -26,6 +26,8 @@ LOGGER_NOT_SUPPORTED_ERROR_MESSAGE = (
     f"{DEFAULT_ERROR_MESSAGE_PREFIX}Specified Logger is not supported"
 )
 DISCORD_JSON_CONTENT_VALUE_ABOVE_LIMIT_ERROR_MESSAGE = f"{DEFAULT_ERROR_MESSAGE_PREFIX}The `content` value inside DiscordAPIJSONData is above {DISCORD_MAX_CHARS_LIMIT} characters."
+STRUCTLOG_WRONG_FUNCTION_ERROR_MESSAGE = f"{DEFAULT_ERROR_MESSAGE_PREFIX}Structlog configuration should be done during logging initialization. Use `discord_structlog_processor_wrapper` processor wrapper instead of `add_discord_logging_handler`"
+
 
 # Requests
 DEFAULT_HEADERS = {
