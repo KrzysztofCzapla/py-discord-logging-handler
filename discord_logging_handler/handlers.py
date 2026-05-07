@@ -2,6 +2,14 @@ import logging
 import sys
 import traceback as tb
 
+from discord_logging_handler.constants import (
+    LOGURU_MESSAGE,
+    LOGURU_FILE,
+    LOGURU_EXTRA,
+    STRUCTLOG_EVENT,
+    STRUCTLOG_MESSAGE,
+    STRUCTLOG_PATHNAME,
+)
 from discord_logging_handler.content_manager import ContentManager
 from discord_logging_handler.discord_api_adapter import DiscordAPIAdapter
 from discord_logging_handler.enums import DiscordLoggingHandlerLevel
@@ -61,14 +69,14 @@ class _DefaultHandler(logging.Handler):
 def _discord_loguru_handler_wrapper(input_data: DiscordHandlerInputData):
     def _discord_loguru_handler(message):
         record = message.record
-        message = record["message"]
-        file = record["file"].path
+        message = record[LOGURU_MESSAGE]
+        file = record[LOGURU_FILE].path
 
         exc_info = sys.exc_info()
         traceback = "".join(tb.format_exception(*exc_info)) if exc_info else None
 
         additional_attributes = {}
-        extra = record["extra"]
+        extra = record[LOGURU_EXTRA]
         for attr in input_data.content_dataclass_additional_fields:
             if (value := extra.get(attr)) is not None:
                 additional_attributes[attr] = value
@@ -87,16 +95,16 @@ def _discord_loguru_handler_wrapper(input_data: DiscordHandlerInputData):
 
 def discord_structlog_processor_wrapper(input_data: DiscordHandlerInputData):
     def _discord_structlog_processor(logger, method_name, event_dict):
-        message = event_dict.get("event")
+        message = event_dict.get(STRUCTLOG_EVENT)
 
         logging_level = input_data.logging_level
         legal_levels = DiscordLoggingHandlerLevel.get_current_and_higher_level_name(
             logging_level.value
         )
         if method_name not in [level.lower() for level in legal_levels]:
-            return {"message": message}
+            return {STRUCTLOG_MESSAGE: message}
 
-        file = event_dict.get("pathname")
+        file = event_dict.get(STRUCTLOG_PATHNAME)
         exc_info = sys.exc_info()
         traceback = "".join(tb.format_exception(*exc_info)) if exc_info else None
 
@@ -114,6 +122,6 @@ def discord_structlog_processor_wrapper(input_data: DiscordHandlerInputData):
         content_data.traceback = traceback
         _core_handler(content_data, input_data)
 
-        return {"message": message}
+        return {STRUCTLOG_MESSAGE: message}
 
     return _discord_structlog_processor

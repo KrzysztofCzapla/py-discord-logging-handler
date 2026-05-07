@@ -1,6 +1,11 @@
 from abc import ABC, abstractmethod
 from typing import Generic, Dict, List
 
+from discord_logging_handler.constants import (
+    CONTENT_DATA_TRACEBACK,
+    CONTENT_DATA_FILE,
+    CONTENT_DATA_MESSAGE,
+)
 from discord_logging_handler.models import ErrorContentData, ContentDataType
 
 
@@ -31,7 +36,11 @@ class BaseMessageTemplateBuilder(ABC, Generic[ContentDataType]):
 
 
 class ErrorMessageTemplateBuilder(BaseMessageTemplateBuilder[ErrorContentData]):
-    FIELD_LENGTH_LIMITS = {"traceback": 900, "file": 200, "message": 400}
+    FIELD_LENGTH_LIMITS = {
+        CONTENT_DATA_TRACEBACK: 900,
+        CONTENT_DATA_FILE: 200,
+        CONTENT_DATA_MESSAGE: 400,
+    }
 
     @staticmethod
     def build_message_parts(data: ErrorContentData) -> List[str]:

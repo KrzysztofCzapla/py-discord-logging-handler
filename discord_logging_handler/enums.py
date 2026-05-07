@@ -2,6 +2,12 @@ from enum import IntEnum
 
 
 class DiscordLoggingHandlerLevel(IntEnum):
+    """
+    Custom ENUM for logging level.
+
+    Built-in logging and loguru uses the int values, while structlog uses lower-cased `.name` of each attribute.
+    """
+
     DEBUG = 10
     INFO = 20
     WARNING = 30

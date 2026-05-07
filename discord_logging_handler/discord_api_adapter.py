@@ -10,6 +10,8 @@ from discord_logging_handler.constants import (
     NO_WEBHOOK_URL_SET_ERROR_MESSAGE,
     DEFAULT_HEADERS,
     WRONG_WEBHOOK_URL_ERROR_MESSAGE,
+    DEFAULT_ENCODING,
+    DISCORD_DEFAULT_REQUEST_METHOD,
 )
 from discord_logging_handler.models import DiscordAPIJSONData
 
@@ -18,7 +20,7 @@ class DiscordAPIAdapter:
     """
     Internal class for interaction with the Discord API.
 
-    No need for detailed docstrings for now, since everything is straightforward.
+    No need for detailed docstrings for now, since everything is straightforward and isolated from the rest of the package.
     """
 
     @staticmethod
@@ -33,9 +35,9 @@ class DiscordAPIAdapter:
         )
         req = urllib.request.Request(
             webhook_url,
-            data=json.dumps(asdict(body)).encode("utf-8"),
+            data=json.dumps(asdict(body)).encode(DEFAULT_ENCODING),
             headers=DEFAULT_HEADERS,
-            method="POST",
+            method=DISCORD_DEFAULT_REQUEST_METHOD,
         )
         urllib.request.urlopen(req)
 

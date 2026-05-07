@@ -12,6 +12,22 @@ from discord_logging_handler.models import BaseContentData, ErrorContentData
 
 @dataclass
 class DiscordHandlerInputData:
+    """
+    Input data when initializing the discord handler to customize its behavior
+
+    The only required field is the `app_name`.
+
+    app_name:
+        - Name of your app/service - In the default discord message template it is showcased at the top
+        - webhook_url, webhook_id, webhook_token - your webhook setup, e.g. where we will send the message -
+            if not provided by ENV variables, either url has to be provided or id and token.
+            If id and token are provided, then they will be later used to create the webhook url.
+        - username - overrides the default webhook username
+        - avatar_url - overrides the default avatar of the webhook bot
+        - add_additional_data_to_content - whether to add additional information about truncated fields to the message
+        - content_dataclass_type -
+    """
+
     app_name: str
     webhook_url: str | None = None
     webhook_id: str | None = None

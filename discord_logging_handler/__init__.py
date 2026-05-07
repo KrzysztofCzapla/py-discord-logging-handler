@@ -4,3 +4,6 @@ from discord_logging_handler.api import (
 from discord_logging_handler.input_data import (
     DiscordHandlerInputData as DiscordHandlerInputData,
 )
+from discord_logging_handler.handlers import (
+    discord_structlog_processor_wrapper as discord_structlog_processor_wrapper,
+)

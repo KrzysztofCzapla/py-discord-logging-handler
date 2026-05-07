@@ -1,5 +1,6 @@
 DISCORD_WEBHOOK_URL_PREFIX = "https://discord.com/api/webhooks/"
 DISCORD_MAX_CHARS_LIMIT = 2000
+DISCORD_DEFAULT_REQUEST_METHOD = "POST"
 
 # ENV Variables
 DISCORD_LOGGING_HANDLER_WEBHOOK_URL = "DISCORD_LOGGING_HANDLER_WEBHOOK_URL"
@@ -36,6 +37,7 @@ DEFAULT_HEADERS = {
     "Accept": "*/*",
     "Connection": "keep-alive",
 }
+DEFAULT_ENCODING = "utf-8"
 
 # Message Template Builders
 DEFAULT_PING = "@everyone"
@@ -43,3 +45,22 @@ DEFAULT_EMOJI = ":rotating_light:"
 DEFAULT_TRUNCATION_ENDING = "..."
 
 DEFAULT_ADDITIONAL_DATA_TEXT = "Truncated Fields: {truncated_fields}"
+
+# Loggers Attributes
+DEFAULT_LOGGER_METHOD = "addHandler"
+LOGURU_METHOD = "add"
+STRUCTLOG_METHOD = "get_config"
+
+# Handlers Constants
+LOGURU_MESSAGE = "message"
+LOGURU_FILE = "file"
+LOGURU_EXTRA = "extra"
+
+STRUCTLOG_EVENT = "event"
+STRUCTLOG_MESSAGE = "message"
+STRUCTLOG_PATHNAME = "pathname"
+
+# ContentData Attributes
+CONTENT_DATA_TRACEBACK = "traceback"
+CONTENT_DATA_FILE = "file"
+CONTENT_DATA_MESSAGE = "message"
