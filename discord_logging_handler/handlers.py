@@ -1,4 +1,5 @@
 import logging
+import sys
 import traceback as tb
 
 from discord_logging_handler.content_manager import ContentManager
@@ -38,9 +39,9 @@ class _DefaultHandler(logging.Handler):
     def emit(self, record: logging.LogRecord):
         message = record.getMessage()
         file = record.pathname
-        traceback = None
-        if record.exc_info:
-            traceback = "".join(tb.format_exception(*record.exc_info))
+
+        exc_info = sys.exc_info()
+        traceback = "".join(tb.format_exception(*exc_info))
 
         additional_attributes = {}
         for attr in self.input_data.content_dataclass_additional_fields:
@@ -62,8 +63,9 @@ def _discord_loguru_handler_wrapper(input_data: DiscordHandlerInputData):
         record = message.record
         message = record["message"]
         file = record["file"].path
-        exc = record["exception"]
-        traceback = str(exc) if exc else None
+
+        exc_info = sys.exc_info()
+        traceback = "".join(tb.format_exception(*exc_info)) if exc_info else None
 
         additional_attributes = {}
         extra = record["extra"]
@@ -95,10 +97,8 @@ def discord_structlog_processor_wrapper(input_data: DiscordHandlerInputData):
             return {"message": message}
 
         file = event_dict.get("pathname")
-        traceback = None
-        exc_info = event_dict.get("exc_info")
-        if exc_info:
-            traceback = "".join(tb.format_exception(*exc_info))
+        exc_info = sys.exc_info()
+        traceback = "".join(tb.format_exception(*exc_info)) if exc_info else None
 
         additional_attributes = {}
         for attr in input_data.content_dataclass_additional_fields:

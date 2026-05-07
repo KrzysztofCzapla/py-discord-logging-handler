@@ -29,7 +29,7 @@ class TestDiscordLoggingHandlerAPI:
         try:
             1 / 0
         except Exception:
-            logger.exception("exception log")
+            logger.error("exception log")
         assert "traceback" in get_mock_urllib_json_body(mock_urllib)
         mock_urllib.assert_called_once()
 
@@ -52,9 +52,9 @@ class TestDiscordLoggingHandlerAPI:
         try:
             1 / 0
         except Exception as e:
-            loguru_logger.exception(f"exception log: {e}")
-        assert "traceback" in get_mock_urllib_json_body(mock_urllib)
+            loguru_logger.error(f"exception log: {e}")
         mock_urllib.assert_called_once()
+        assert "traceback" in get_mock_urllib_json_body(mock_urllib)
 
     def test_api_structlog_smoke(
         self, default_input_data, mock_urllib, set_url_env_variable
@@ -87,6 +87,6 @@ class TestDiscordLoggingHandlerAPI:
         try:
             1 / 0
         except Exception as e:
-            structlog_logger.exception(f"error log {e}")
+            structlog_logger.error(f"error log {e}")
         mock_urllib.assert_called_once()
         assert "traceback" in get_mock_urllib_json_body(mock_urllib)

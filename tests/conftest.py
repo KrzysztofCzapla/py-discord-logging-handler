@@ -13,12 +13,23 @@ from discord_logging_handler.models import (
     DiscordAPIJSONData,
 )
 
+from loguru import logger as loguru_logger
+
 
 @pytest.fixture(autouse=True)
 def mock_urllib(monkeypatch):
     mock = MagicMock()
     monkeypatch.setattr("urllib.request.urlopen", mock)
-    return mock
+    yield mock
+    mock.reset_mock()
+
+
+@pytest.fixture(autouse=True)
+def update_loguru_logger():
+    """Remove logger, so in each test we get a new one"""
+    loguru_logger.remove()
+    yield
+    loguru_logger.remove()
 
 
 @pytest.fixture
