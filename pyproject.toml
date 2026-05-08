@@ -1,3 +1,7 @@
+[build-system]
+requires = ["uv_build"]
+build-backend = "hatchling.build"
+
 [project]
 name = "discord-logging-handler"
 version = "0.1.0"
@@ -5,6 +9,12 @@ description = "out-of-the-box logging handler for discord alerting."
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = []
+authors = [
+    {name = "Krzysztof Czapla"}
+]
+
+[project.urls]
+Homepage = "https://github.com/KrzysztofCzapla/discord-logging-handler"
 
 [dependency-groups]
 test = [

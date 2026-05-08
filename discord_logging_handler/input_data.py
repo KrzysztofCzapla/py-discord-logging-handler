@@ -39,11 +39,11 @@ class DiscordHandlerInputData:
     username: str | None = None
     avatar_url: str | None = None
     add_additional_data_to_content: bool = True
-    content_dataclass_type: Type[BaseContentData] = Type[ErrorContentData]
+    content_dataclass_type: Type[BaseContentData] = ErrorContentData
     content_dataclass_additional_fields: List[str] = field(default_factory=list)
-    message_template_builder_type: Type[BaseMessageTemplateBuilder] = Type[
+    message_template_builder_type: Type[BaseMessageTemplateBuilder] = (
         ErrorMessageTemplateBuilder
-    ]
+    )
     logging_level: DiscordLoggingHandlerLevel = DiscordLoggingHandlerLevel.ERROR
 
     def __post_init__(self):
