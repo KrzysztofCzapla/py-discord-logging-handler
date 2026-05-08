@@ -10,8 +10,8 @@ from py_discord_logging_handler.constants import (
     STRUCTLOG_METHOD,
 )
 from py_discord_logging_handler.handlers import (
-    _DefaultHandler,
-    _discord_loguru_handler_wrapper,
+    DiscordLoggingHandler,
+    discord_loguru_handler_wrapper,
 )
 from py_discord_logging_handler.input_data import DiscordHandlerInputData
 
@@ -44,12 +44,12 @@ def add_discord_logging_handler(logger: Any, input_data: DiscordHandlerInputData
     level = input_data.logging_level
     if hasattr(logger, DEFAULT_LOGGER_METHOD):
         # default logger
-        handler = _DefaultHandler(input_data)
+        handler = DiscordLoggingHandler(input_data)
         handler.setLevel(int(level))
         logger.addHandler(handler)
     elif hasattr(logger, LOGURU_METHOD):
         # loguru logger
-        logger.add(_discord_loguru_handler_wrapper(input_data), level=level.name)
+        logger.add(discord_loguru_handler_wrapper(input_data), level=level.name)
     elif hasattr(logger, STRUCTLOG_METHOD):
         # structlog logger
         raise ValueError(STRUCTLOG_WRONG_FUNCTION_ERROR_MESSAGE)
