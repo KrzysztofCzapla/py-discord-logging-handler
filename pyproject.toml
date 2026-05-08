@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "discord-logging-handler"
+name = "py-discord-logging-handler"
 version = "0.1.0"
 description = "out-of-the-box logging handler for discord alerting."
 readme = "README.md"
@@ -14,7 +14,7 @@ authors = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/KrzysztofCzapla/discord-logging-handler"
+Homepage = "https://github.com/KrzysztofCzapla/py-discord-logging-handler"
 
 [dependency-groups]
 test = [

@@ -12,7 +12,7 @@ wheels = [
 ]
 
 [[package]]
-name = "discord-logging-handler"
+name = "py-discord-logging-handler"
 version = "0.1.0"
 source = { editable = "." }
 

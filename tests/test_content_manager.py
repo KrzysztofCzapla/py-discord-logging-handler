@@ -54,7 +54,7 @@ class TestContentManager:
         message = "this is a test message"
         error_content_data = ErrorContentData(
             app_name="whatever",
-            file="discord-logging-handler/tests/temp_e2e_test.py",
+            file="py-discord-logging-handler/tests/temp_e2e_test.py",
             message=message,
         )
         limits = {"file": 10, "message": 200}
@@ -74,7 +74,7 @@ class TestContentManager:
         message = "this is a test message" * 100
         error_content_data = ErrorContentData(
             app_name="whatever",
-            file="discord-logging-handler/tests/temp_e2e_test.py",
+            file="py-discord-logging-handler/tests/temp_e2e_test.py",
             message=message,
         )
         content = ContentManager.create_content_message(error_content_data)
@@ -88,7 +88,7 @@ class TestContentManager:
         message = "this is a test message" * 100
         error_content_data = ErrorContentData(
             app_name="whatever",
-            file="discord-logging-handler/tests/temp_e2e_test.py",
+            file="py-discord-logging-handler/tests/temp_e2e_test.py",
             message=message,
         )
         content = ContentManager.create_content_message(

@@ -1,1 +1,1 @@
-# discord-logging-handler
+# py-discord-logging-handler

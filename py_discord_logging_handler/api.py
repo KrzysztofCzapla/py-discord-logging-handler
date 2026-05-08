@@ -18,7 +18,7 @@ from py_discord_logging_handler.input_data import DiscordHandlerInputData
 
 def add_discord_logging_handler(logger: Any, input_data: DiscordHandlerInputData):
     """
-    Main function for interaction with the discord-logging-handler package.
+    Main function for interaction with the py-discord-logging-handler package.
 
     It takes the inputted logger and data and adds a handler to the logger with the context of that data.
     You don't need to set any handlers yourself, it works out of the box.

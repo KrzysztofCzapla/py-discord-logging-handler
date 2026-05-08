@@ -51,7 +51,7 @@ def default_input_data():
 def error_content_data():
     return ErrorContentData(
         app_name="whatever",
-        file="discord-logging-handler/tests/temp_e2e_test.py",
+        file="py-discord-logging-handler/tests/temp_e2e_test.py",
         message="this is a test message",
     )
 
@@ -64,7 +64,7 @@ def custom_content_data():
 
     return CustomContentData(
         app_name="whatever",
-        file="discord-logging-handler/tests/temp_e2e_test.py",
+        file="py-discord-logging-handler/tests/temp_e2e_test.py",
         message="this is a test message",
         custom_field="custom field value",
     )
