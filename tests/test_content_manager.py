@@ -1,10 +1,10 @@
-from discord_logging_handler.constants import (
+from py_discord_logging_handler.constants import (
     DEFAULT_ADDITIONAL_DATA_TEXT,
     DISCORD_MAX_CHARS_LIMIT,
     DEFAULT_TRUNCATION_ENDING,
 )
-from discord_logging_handler.content_manager import ContentManager
-from discord_logging_handler.models import ErrorContentData
+from py_discord_logging_handler.content_manager import ContentManager
+from py_discord_logging_handler.models import ErrorContentData
 
 
 class TestContentManager:

@@ -1,10 +1,10 @@
 import pytest
 
-from discord_logging_handler.message_template_builder import (
+from py_discord_logging_handler.message_template_builder import (
     ErrorMessageTemplateBuilder,
     BaseMessageTemplateBuilder,
 )
-from discord_logging_handler.models import BaseContentData
+from py_discord_logging_handler.models import BaseContentData
 
 
 class TestMessageTemplateBuilder:

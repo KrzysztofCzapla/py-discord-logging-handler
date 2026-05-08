@@ -4,7 +4,7 @@ from types import SimpleNamespace
 from unittest.mock import MagicMock
 
 import pytest
-from discord_logging_handler.handlers import (
+from py_discord_logging_handler.handlers import (
     _core_handler,
     _DefaultHandler,
     _discord_loguru_handler_wrapper,

@@ -2,7 +2,7 @@ import logging
 import sys
 import traceback as tb
 
-from discord_logging_handler.constants import (
+from py_discord_logging_handler.constants import (
     LOGURU_MESSAGE,
     LOGURU_FILE,
     LOGURU_EXTRA,
@@ -10,14 +10,14 @@ from discord_logging_handler.constants import (
     STRUCTLOG_MESSAGE,
     STRUCTLOG_PATHNAME,
 )
-from discord_logging_handler.content_manager import ContentManager
-from discord_logging_handler.discord_api_adapter import DiscordAPIAdapter
-from discord_logging_handler.enums import DiscordLoggingHandlerLevel
-from discord_logging_handler.models import (
+from py_discord_logging_handler.content_manager import ContentManager
+from py_discord_logging_handler.discord_api_adapter import DiscordAPIAdapter
+from py_discord_logging_handler.enums import DiscordLoggingHandlerLevel
+from py_discord_logging_handler.models import (
     BaseContentData,
     DiscordAPIJSONData,
 )
-from discord_logging_handler.input_data import DiscordHandlerInputData
+from py_discord_logging_handler.input_data import DiscordHandlerInputData
 
 
 def _core_handler(content_data: BaseContentData, input_data: DiscordHandlerInputData):

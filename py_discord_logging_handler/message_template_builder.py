@@ -1,12 +1,12 @@
 from abc import ABC, abstractmethod
 from typing import Generic, Dict, List
 
-from discord_logging_handler.constants import (
+from py_discord_logging_handler.constants import (
     CONTENT_DATA_TRACEBACK,
     CONTENT_DATA_FILE,
     CONTENT_DATA_MESSAGE,
 )
-from discord_logging_handler.models import ErrorContentData, ContentDataType
+from py_discord_logging_handler.models import ErrorContentData, ContentDataType
 
 
 class BaseMessageTemplateBuilder(ABC, Generic[ContentDataType]):

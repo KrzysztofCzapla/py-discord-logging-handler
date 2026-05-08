@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from typing import TypeVar
 
-from discord_logging_handler.constants import (
+from py_discord_logging_handler.constants import (
     DEFAULT_EMOJI,
     DEFAULT_PING,
     DISCORD_MAX_CHARS_LIMIT,

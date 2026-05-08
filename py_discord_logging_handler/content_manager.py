@@ -1,15 +1,15 @@
 from typing import Dict, List, Type
 
-from discord_logging_handler.constants import (
+from py_discord_logging_handler.constants import (
     DEFAULT_ADDITIONAL_DATA_TEXT,
     DEFAULT_TRUNCATION_ENDING,
     DISCORD_MAX_CHARS_LIMIT,
 )
-from discord_logging_handler.message_template_builder import (
+from py_discord_logging_handler.message_template_builder import (
     BaseMessageTemplateBuilder,
     ErrorMessageTemplateBuilder,
 )
-from discord_logging_handler.models import ContentDataType
+from py_discord_logging_handler.models import ContentDataType
 
 
 class ContentManager:

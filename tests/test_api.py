@@ -1,7 +1,7 @@
 import logging
 
-from discord_logging_handler import add_discord_logging_handler
-from discord_logging_handler.handlers import discord_structlog_processor_wrapper
+from py_discord_logging_handler import add_discord_logging_handler
+from py_discord_logging_handler.handlers import discord_structlog_processor_wrapper
 from tests.utils import get_mock_urllib_json_body
 from loguru import logger as loguru_logger
 import structlog

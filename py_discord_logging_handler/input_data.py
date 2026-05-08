@@ -1,13 +1,13 @@
 from dataclasses import dataclass, field
 from typing import Type, List
 
-from discord_logging_handler.constants import NO_APP_NAME_ERROR_MESSAGE
-from discord_logging_handler.enums import DiscordLoggingHandlerLevel
-from discord_logging_handler.message_template_builder import (
+from py_discord_logging_handler.constants import NO_APP_NAME_ERROR_MESSAGE
+from py_discord_logging_handler.enums import DiscordLoggingHandlerLevel
+from py_discord_logging_handler.message_template_builder import (
     BaseMessageTemplateBuilder,
     ErrorMessageTemplateBuilder,
 )
-from discord_logging_handler.models import BaseContentData, ErrorContentData
+from py_discord_logging_handler.models import BaseContentData, ErrorContentData
 
 
 @dataclass

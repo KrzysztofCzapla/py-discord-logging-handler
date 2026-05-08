@@ -4,10 +4,10 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from discord_logging_handler import DiscordHandlerInputData
-from discord_logging_handler.constants import DISCORD_LOGGING_HANDLER_WEBHOOK_URL
-from discord_logging_handler.message_template_builder import BaseMessageTemplateBuilder
-from discord_logging_handler.models import (
+from py_discord_logging_handler import DiscordHandlerInputData
+from py_discord_logging_handler.constants import DISCORD_LOGGING_HANDLER_WEBHOOK_URL
+from py_discord_logging_handler.message_template_builder import BaseMessageTemplateBuilder
+from py_discord_logging_handler.models import (
     ErrorContentData,
     BaseContentData,
     DiscordAPIJSONData,

@@ -2,7 +2,7 @@ import urllib.request
 from dataclasses import asdict
 import os
 import json
-from discord_logging_handler.constants import (
+from py_discord_logging_handler.constants import (
     DISCORD_WEBHOOK_URL_PREFIX,
     DISCORD_LOGGING_HANDLER_WEBHOOK_URL,
     DISCORD_LOGGING_HANDLER_WEBHOOK_TOKEN,
@@ -13,7 +13,7 @@ from discord_logging_handler.constants import (
     DEFAULT_ENCODING,
     DISCORD_DEFAULT_REQUEST_METHOD,
 )
-from discord_logging_handler.models import DiscordAPIJSONData
+from py_discord_logging_handler.models import DiscordAPIJSONData
 
 
 class DiscordAPIAdapter:

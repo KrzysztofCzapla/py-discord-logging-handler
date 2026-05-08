@@ -1,9 +1,9 @@
 import pytest
 
-from discord_logging_handler import DiscordHandlerInputData
-from discord_logging_handler.enums import DiscordLoggingHandlerLevel
-from discord_logging_handler.message_template_builder import ErrorMessageTemplateBuilder
-from discord_logging_handler.models import ErrorContentData
+from py_discord_logging_handler import DiscordHandlerInputData
+from py_discord_logging_handler.enums import DiscordLoggingHandlerLevel
+from py_discord_logging_handler.message_template_builder import ErrorMessageTemplateBuilder
+from py_discord_logging_handler.models import ErrorContentData
 
 
 class TestInputData:

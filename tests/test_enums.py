@@ -1,4 +1,4 @@
-from discord_logging_handler.enums import DiscordLoggingHandlerLevel
+from py_discord_logging_handler.enums import DiscordLoggingHandlerLevel
 
 
 class TestDiscordHandlerLoggingLevel:

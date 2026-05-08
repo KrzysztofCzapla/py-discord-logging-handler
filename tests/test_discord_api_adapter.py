@@ -1,11 +1,11 @@
 import pytest
 
-from discord_logging_handler.constants import (
+from py_discord_logging_handler.constants import (
     DISCORD_LOGGING_HANDLER_WEBHOOK_URL,
     DISCORD_LOGGING_HANDLER_WEBHOOK_ID,
     DISCORD_LOGGING_HANDLER_WEBHOOK_TOKEN,
 )
-from discord_logging_handler.discord_api_adapter import DiscordAPIAdapter
+from py_discord_logging_handler.discord_api_adapter import DiscordAPIAdapter
 
 
 class TestDiscordAPIAdapter:

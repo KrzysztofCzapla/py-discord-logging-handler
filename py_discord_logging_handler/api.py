@@ -1,6 +1,6 @@
 from typing import Any
 
-from discord_logging_handler.constants import (
+from py_discord_logging_handler.constants import (
     NO_LOGGER_SET_ERROR_MESSAGE,
     LOGGER_NOT_SUPPORTED_ERROR_MESSAGE,
     NO_INPUT_DATA_ERROR_MESSAGE,
@@ -9,11 +9,11 @@ from discord_logging_handler.constants import (
     LOGURU_METHOD,
     STRUCTLOG_METHOD,
 )
-from discord_logging_handler.handlers import (
+from py_discord_logging_handler.handlers import (
     _DefaultHandler,
     _discord_loguru_handler_wrapper,
 )
-from discord_logging_handler.input_data import DiscordHandlerInputData
+from py_discord_logging_handler.input_data import DiscordHandlerInputData
 
 
 def add_discord_logging_handler(logger: Any, input_data: DiscordHandlerInputData):
