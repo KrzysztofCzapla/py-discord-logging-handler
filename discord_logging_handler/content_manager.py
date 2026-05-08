@@ -1,4 +1,3 @@
-from dataclasses import dataclass
 from typing import Dict, List, Type
 
 from discord_logging_handler.constants import (
@@ -13,8 +12,18 @@ from discord_logging_handler.message_template_builder import (
 from discord_logging_handler.models import ContentDataType
 
 
-@dataclass
 class ContentManager:
+    """
+    Class responsible for creation of content. It uses a specified template_builder to generate the contents of the message.
+
+    Flow:
+        1) Truncate fields based on `template_builder`'s  FIELD_LENGTH_LIMITS
+        2) append info about truncated fields to the additional info if turned on
+        3) Create the parts of the message using the `template_builder`
+        4) Assemble the parts with having the max characters allowed by Discord in mind
+        5) Return final message, it is guaranteed that it's below 2k characters that Discord allows.
+    """
+
     @staticmethod
     def create_content_message(
         data: ContentDataType,
@@ -23,6 +32,7 @@ class ContentManager:
         ] = ErrorMessageTemplateBuilder,
         add_additional_info: bool = True,
     ) -> str:
+        """Main method. Described in the class docstring's FLOW part."""
         truncated_fields = ContentManager._truncate_fields(
             data, template_builder.FIELD_LENGTH_LIMITS, DEFAULT_TRUNCATION_ENDING
         )
@@ -42,6 +52,9 @@ class ContentManager:
     def _truncate_fields(
         data: ContentDataType, limits: Dict[str, int], truncation_ending: str
     ) -> List[str]:
+        """
+        truncates fields of a given dataclass based on provided limits.
+        """
         truncated_fields = []
         for field_name, limit in limits.items():
             attr = getattr(data, field_name, None)
@@ -61,6 +74,11 @@ class ContentManager:
     def _assemble_parts(
         parts: List[str], concatenation_char: str, limit: int, truncation_ending: str
     ) -> str:
+        """
+        Gradually creates a final string from given parts.
+
+        If adding a part results in going over the limit, we stop and return everything we have.
+        """
         result = ""
         for part in parts:
             if not part:

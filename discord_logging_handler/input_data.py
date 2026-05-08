@@ -25,7 +25,11 @@ class DiscordHandlerInputData:
         - username - overrides the default webhook username
         - avatar_url - overrides the default avatar of the webhook bot
         - add_additional_data_to_content - whether to add additional information about truncated fields to the message
-        - content_dataclass_type -
+        - content_dataclass_type - this field can specify a custom dataclass for content data that will be later populated in the actual message sent
+        - message_template_builder_type - class that will be created to actually build the final message sent in the webhook. It will
+            use the data inside the content dataclass
+        - logging_level - enum of the minimum logging level that the handle should support. So, if the level is ERROR, then
+            the handler will be run on the ERROR level and CRITICAL level, because CRITICAL is higher
     """
 
     app_name: str
@@ -35,11 +39,11 @@ class DiscordHandlerInputData:
     username: str | None = None
     avatar_url: str | None = None
     add_additional_data_to_content: bool = True
-    content_dataclass_type: Type[BaseContentData] = ErrorContentData
+    content_dataclass_type: Type[BaseContentData] = Type[ErrorContentData]
     content_dataclass_additional_fields: List[str] = field(default_factory=list)
-    message_template_builder_type: Type[BaseMessageTemplateBuilder] = (
+    message_template_builder_type: Type[BaseMessageTemplateBuilder] = Type[
         ErrorMessageTemplateBuilder
-    )
+    ]
     logging_level: DiscordLoggingHandlerLevel = DiscordLoggingHandlerLevel.ERROR
 
     def __post_init__(self):

@@ -10,16 +10,25 @@ from discord_logging_handler.models import ErrorContentData, ContentDataType
 
 
 class BaseMessageTemplateBuilder(ABC, Generic[ContentDataType]):
-    FIELD_LENGTH_LIMITS: Dict[str, int] = {}
-    PARTS_CONCATENATION_CHARACTER: str = "\n\n"
-
     """
-    Abstract class for creating message templates.
+    Abstract class for creating message templates that must be inherited.
 
-    Message templates are formattable strings that will be used to send to discord API as the `content` param.
+    You can specify the content dataclass that will be used by the Builder to generate content like this:
+    `class ErrorMessageTemplateBuilder(BaseMessageTemplateBuilder[ErrorContentData]):`
+    This is done for typing purposes and can be skipped.
+
+    Attributes:
+        - FIELD_LENGTH_LIMITS - you can specify how long each attribute/field in the dataclass can be. This must be used
+            smartly, since Discord allows only 2k characters per message.
+        - PARTS_CONCATENATION_CHARACTER - the main method returns list of strings that later need to be concatenated.
+            This param specifies which character concatenates those strings.
+
 
     Every subclass must implement `build_message_parts` method.
     """
+
+    FIELD_LENGTH_LIMITS: Dict[str, int] = {}
+    PARTS_CONCATENATION_CHARACTER: str = "\n\n"
 
     @staticmethod
     @abstractmethod
@@ -31,7 +40,9 @@ class BaseMessageTemplateBuilder(ABC, Generic[ContentDataType]):
             data: (BaseContentData subclasses): data from which we will take information to put in the returned content string
 
         Returns:
-            str: a content message ready to be sent to the API
+            List[str]: list of strings that will be later concatenated.
+                *THEY MUST BE ORDERED BY IMPORTANCE DESCENDING*.
+                This is because we will later cut them in case some of them cannot fit into the max chars allowed (2k)
         """
 
 

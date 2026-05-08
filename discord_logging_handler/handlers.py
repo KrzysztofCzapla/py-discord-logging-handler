@@ -21,6 +21,13 @@ from discord_logging_handler.input_data import DiscordHandlerInputData
 
 
 def _core_handler(content_data: BaseContentData, input_data: DiscordHandlerInputData):
+    """
+    Main function for interaction with the package's functionality.
+
+    1) Create a message based on the provided content
+    2) Create JSON data to be sent to the API
+    3) Send the request to the API
+    """
     content = ContentManager.create_content_message(
         data=content_data,
         template_builder=input_data.message_template_builder_type,

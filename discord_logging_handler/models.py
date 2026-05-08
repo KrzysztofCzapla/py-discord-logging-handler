@@ -11,6 +11,8 @@ from discord_logging_handler.constants import (
 
 @dataclass
 class DiscordAPIJSONData:
+    """Data that will be sent in the actual API request to Discord"""
+
     content: str
     username: str | None = None
     avatar_url: str | None = None
@@ -22,6 +24,12 @@ class DiscordAPIJSONData:
 
 @dataclass
 class BaseContentData:
+    """
+    Base class for ContentData.
+
+    You can create a custom ContentData by inheriting this class.
+    """
+
     app_name: str
     file: str
     message: str
@@ -36,4 +44,8 @@ ContentDataType = TypeVar("ContentDataType", bound=BaseContentData)
 
 @dataclass
 class ErrorContentData(BaseContentData):
+    """
+    Uses the same fields as the default, but for the ease of future development it was extracted to another class
+    """
+
     pass
