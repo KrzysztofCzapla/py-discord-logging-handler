@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "py-discord-logging-handler"
-version = "0.1.0"
+version = "0.2.0"
 description = "out-of-the-box logging handler for discord alerting."
 readme = "README.md"
 requires-python = ">=3.10"

@@ -9,3 +9,6 @@ from py_discord_logging_handler.handlers import (
     discord_loguru_handler_wrapper as discord_loguru_handler_wrapper,
     DiscordLoggingHandler as DiscordLoggingHandler,
 )
+from py_discord_logging_handler.enums import (
+    DiscordLoggingHandlerLevel as DiscordLoggingHandlerLevel
+)
