@@ -46,7 +46,7 @@ def _core_handler(content_data: BaseContentData, input_data: DiscordHandlerInput
     )
 
 
-class _DefaultHandler(logging.Handler):
+class DiscordLoggingHandler(logging.Handler):
     def __init__(self, input_data: DiscordHandlerInputData):
         super().__init__()
         self.input_data = input_data
@@ -73,7 +73,7 @@ class _DefaultHandler(logging.Handler):
         _core_handler(content_data, self.input_data)
 
 
-def _discord_loguru_handler_wrapper(input_data: DiscordHandlerInputData):
+def discord_loguru_handler_wrapper(input_data: DiscordHandlerInputData):
     def _discord_loguru_handler(message):
         record = message.record
         message = record[LOGURU_MESSAGE]

@@ -6,8 +6,8 @@ from unittest.mock import MagicMock
 import pytest
 from py_discord_logging_handler.handlers import (
     _core_handler,
-    _DefaultHandler,
-    _discord_loguru_handler_wrapper,
+    DiscordLoggingHandler,
+    discord_loguru_handler_wrapper,
     discord_structlog_processor_wrapper,
 )
 from tests.utils import get_mock_urllib_json_body
@@ -39,7 +39,7 @@ class TestHandlers:
             exc_info=None,
         )
 
-        handler = _DefaultHandler(default_input_data)
+        handler = DiscordLoggingHandler(default_input_data)
         handler.emit(record)
         mock_urllib.assert_called_once()
 
@@ -49,7 +49,7 @@ class TestHandlers:
     def test_loguru_handler(
         self, default_input_data, set_url_env_variable, mock_urllib
     ):
-        handler_function = _discord_loguru_handler_wrapper(default_input_data)
+        handler_function = discord_loguru_handler_wrapper(default_input_data)
         logging_message = SimpleNamespace(
             record={
                 "message": self.message,

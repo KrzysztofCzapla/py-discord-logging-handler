@@ -5,7 +5,7 @@ on:
     types: [published]
 
 jobs:
-  publish:
+  test-and-publish:
     runs-on: ubuntu-latest
 
     permissions:
@@ -19,6 +19,12 @@ jobs:
 
       - name: Set up Python
         run: uv python install 3.10
+
+      - name: Install test dependencies
+        run: uv sync --group test
+
+      - name: Run tests
+        run: uv run pytest tests
 
       - name: Build
         run: uv build
